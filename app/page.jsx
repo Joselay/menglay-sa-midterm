@@ -38,7 +38,7 @@ export default function DialogDemo() {
     toast({
       description: (
         <div className="flex items-center gap-2">
-          <Check className="h-4 w-4 text-green-500" /> {/* Green tick icon */}
+          <Check className="h-4 w-4 text-green-500" />
           <span>Your settings have been saved successfully.</span>
         </div>
       ),
@@ -58,7 +58,6 @@ export default function DialogDemo() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          {/* Bot Token Input */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="botToken" className="text-right">
               Bot Token
@@ -71,7 +70,6 @@ export default function DialogDemo() {
             />
           </div>
 
-          {/* Chat ID Input */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="chatId" className="text-right">
               Chat ID

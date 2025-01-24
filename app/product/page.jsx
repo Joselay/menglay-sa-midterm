@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useCartStore from "../stores/cartStore";
-import useTelegramStore from "../stores/telegramStore"; // Import the Telegram store
+import useTelegramStore from "../stores/telegramStore";
 
 const perks = [
   {
@@ -71,24 +71,22 @@ const footerNavigation = {
 
 export default function ProductsList() {
   const { products, loading, error, fetchProducts } = useStore();
-  const { cart, loadCart, getUniqueItemsCount } = useCartStore(); // Use cart store
-  const { botToken, chatId } = useTelegramStore(); // Use Telegram store
+  const { cart, loadCart, getUniqueItemsCount } = useCartStore();
+  const { botToken, chatId } = useTelegramStore();
 
   useEffect(() => {
     fetchProducts();
-    loadCart(); // Load cart from localStorage on mount
+    loadCart();
   }, [fetchProducts, loadCart]);
 
-  // Handle sending the message
   const handleSendMessage = async () => {
     if (!botToken || !chatId) {
       alert("Please configure Telegram bot settings first.");
       return;
     }
 
-    const parseMode = "HTML"; // Hardcoded parse mode
+    const parseMode = "HTML";
 
-    // Construct the message dynamically
     const message = `
       <b>🛒 Checkout Details</b>
       <b>-----------------------------</b>

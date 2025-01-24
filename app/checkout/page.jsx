@@ -7,9 +7,9 @@ import {
   PopoverButton,
   PopoverPanel,
 } from "@headlessui/react";
-import useCartStore from "../stores/cartStore"; // Import the cart store
-import useTelegramStore from "../stores/telegramStore"; // Import the Telegram store
-import { useState } from "react"; // Import useState for form state management
+import useCartStore from "../stores/cartStore";
+import useTelegramStore from "../stores/telegramStore";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Check, X } from "lucide-react";
 
@@ -21,16 +21,14 @@ const steps = [
 
 export default function Checkout() {
   const { cart, getTotalPrice, clearCart } = useCartStore();
-  const { botToken, chatId } = useTelegramStore(); // Get botToken and chatId from Zustand store
+  const { botToken, chatId } = useTelegramStore();
   const { toast } = useToast();
 
-  // Calculate subtotal, shipping, tax, and total
   const subtotal = getTotalPrice();
-  const shipping = 15.0; // Fixed shipping cost
-  const tax = subtotal * 0.08; // 8% tax
+  const shipping = 15.0;
+  const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
-  // State for form inputs
   const [formData, setFormData] = useState({
     email: "",
     nameOnCard: "",
@@ -45,7 +43,6 @@ export default function Checkout() {
     postalCode: "",
   });
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -54,10 +51,8 @@ export default function Checkout() {
     });
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Perform checkout logic (e.g., send data to backend)
     console.log("Checkout data:", {
       cart,
       subtotal,
@@ -67,11 +62,9 @@ export default function Checkout() {
       formData,
     });
 
-    // Clear the cart after successful checkout
     clearCart();
   };
 
-  // Handle sending the Telegram message
   const handleCheckout = async () => {
     if (!botToken || !chatId) {
       toast({
@@ -85,17 +78,15 @@ export default function Checkout() {
       return;
     }
 
-    const parseMode = "HTML"; // Hardcoded parse mode
+    const parseMode = "HTML";
 
-    // Use form data for user information
     const user = {
       name: formData.nameOnCard,
       email: formData.email,
       address: `${formData.address}, ${formData.city}, ${formData.region}, ${formData.postalCode}`,
-      phone: formData.company, // Assuming company field is used for phone
+      phone: formData.company,
     };
 
-    // Construct the HTML message
     const message = `
       <b>🛒 Checkout Details</b>
       <b>-----------------------------</b>
@@ -160,7 +151,6 @@ export default function Checkout() {
 
   return (
     <div className="bg-white">
-      {/* Background color split screen for large screens */}
       <div
         aria-hidden="true"
         className="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block"

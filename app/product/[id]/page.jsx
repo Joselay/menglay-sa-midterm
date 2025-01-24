@@ -2,15 +2,7 @@
 
 import { useState, useEffect } from "react";
 import React from "react";
-import {
-  Radio,
-  RadioGroup,
-  Tab,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import {
   Bars3Icon,
   BeakerIcon,
@@ -61,15 +53,14 @@ export default function ProductDetail({ params }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { cart, addToCart, loadCart, getUniqueItemsCount } = useCartStore();
+  const { addToCart, loadCart, getUniqueItemsCount } = useCartStore();
 
   const unwrappedParams = React.use(params);
   const productId = unwrappedParams.id;
 
   useEffect(() => {
-    loadCart(); // Load cart from localStorage on mount
+    loadCart();
   }, [loadCart]);
 
   useEffect(() => {
@@ -95,7 +86,7 @@ export default function ProductDetail({ params }) {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product, quantity); // Add product to cart
+      addToCart(product, quantity);
     }
   };
 

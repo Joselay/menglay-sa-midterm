@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from "@headlessui/react";
+
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
@@ -15,64 +10,12 @@ import {
 } from "@heroicons/react/24/outline";
 import {
   CheckIcon,
-  ClockIcon,
   QuestionMarkCircleIcon,
   XMarkIcon as XMarkIconMini,
 } from "@heroicons/react/20/solid";
 import useCartStore from "../stores/cartStore";
 import Link from "next/link";
 
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Sienna",
-    inStock: true,
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in sienna.",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Black",
-    inStock: false,
-    leadTime: "3–4 weeks",
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-  {
-    id: 3,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35.00",
-    color: "White",
-    inStock: true,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-03.jpg",
-    imageAlt: "Insulated bottle with white base and black snap lid.",
-  },
-];
-const relatedProducts = [
-  {
-    id: 1,
-    name: "Billfold Wallet",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-related-product-01.jpg",
-    imageAlt: "Front of Billfold Wallet in natural leather.",
-    price: "$118",
-    color: "Natural",
-  },
-  // More products...
-];
 const footerNavigation = {
   products: [
     { name: "Bags", href: "#" },
@@ -106,14 +49,13 @@ export default function Cart() {
   const { cart, removeFromCart, updateQuantity, getTotalPrice, loadCart } =
     useCartStore();
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     loadCart();
   }, [loadCart]);
 
   const subtotal = getTotalPrice();
-  const shipping = 5.0; // Fixed shipping cost
-  const tax = subtotal * 0.08; // 8% tax
+  const shipping = 5.0;
+  const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
   return (
@@ -135,7 +77,6 @@ export default function Cart() {
                 <Bars3Icon aria-hidden="true" className="h-6 w-6" />
               </button>
 
-              {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
@@ -173,7 +114,6 @@ export default function Cart() {
                   </a>
                 </div>
 
-                {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
                   <a href="#" className="group -m-2 flex items-center p-2">
                     <ShoppingBagIcon
@@ -382,7 +322,6 @@ export default function Cart() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="border-t border-gray-200 py-20">
             <div className="grid grid-cols-1 md:grid-flow-col md:auto-rows-min md:grid-cols-12 md:gap-x-8 md:gap-y-16">
-              {/* Image section */}
               <div className="col-span-1 md:col-span-2 lg:col-start-1 lg:row-start-1">
                 <img
                   alt=""
@@ -391,7 +330,6 @@ export default function Cart() {
                 />
               </div>
 
-              {/* Sitemap sections */}
               <div className="col-span-6 mt-10 grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-8 md:col-start-3 md:row-start-1 md:mt-0 lg:col-span-6 lg:col-start-2">
                 <div className="grid grid-cols-1 gap-y-12 sm:col-span-2 sm:grid-cols-2 sm:gap-x-8">
                   <div>
@@ -448,7 +386,6 @@ export default function Cart() {
                 </div>
               </div>
 
-              {/* Newsletter section */}
               <div className="mt-12 md:col-span-8 md:col-start-3 md:row-start-2 md:mt-0 lg:col-span-4 lg:col-start-9 lg:row-start-1">
                 <h3 className="text-sm font-medium text-gray-900">
                   Sign up for our newsletter

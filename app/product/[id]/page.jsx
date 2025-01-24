@@ -5,7 +5,6 @@ import React from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import {
   Bars3Icon,
-  BeakerIcon,
   HeartIcon,
   MagnifyingGlassIcon,
   MinusIcon,
@@ -17,6 +16,8 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import useCartStore from "@/app/stores/cartStore";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
+import { BadgeCheck, Check } from "lucide-react";
 
 const footerNavigation = {
   products: [
@@ -55,6 +56,7 @@ export default function ProductDetail({ params }) {
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addToCart, loadCart, getUniqueItemsCount } = useCartStore();
+  const { toast } = useToast();
 
   const unwrappedParams = React.use(params);
   const productId = unwrappedParams.id;
@@ -87,6 +89,14 @@ export default function ProductDetail({ params }) {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product, quantity);
+      toast({
+        description: (
+          <div className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-green-500" />{" "}
+            <span>Your product has been added to cart</span>
+          </div>
+        ),
+      });
     }
   };
 
@@ -159,13 +169,19 @@ export default function ProductDetail({ params }) {
                 </a>
               </div>
 
-              <a href="#" className="flex">
-                <span className="sr-only">Your Company</span>
+              <a href="/" className="flex items-center gap-2 group">
                 <img
-                  alt=""
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  className="h-8 w-auto"
+                  alt="logo"
+                  src="/profile.jpg"
+                  className="h-12 w-auto rounded-full"
                 />
+                <span className="text-2xl font-semibold group-hover:text-indigo-500 transition duration-200 flex items-center ml-2">
+                  JOSE
+                  <BadgeCheck
+                    size={24}
+                    className="fill-indigo-500 stroke-white group-hover:fill-gray-600 transition duration-200"
+                  />
+                </span>
               </a>
 
               <div className="flex flex-1 items-center justify-end">

@@ -3,7 +3,6 @@ import { create } from "zustand";
 const useCartStore = create((set, get) => ({
   cart: [],
 
-  // Add item to cart or update quantity if it already exists
   addToCart: (product, quantity) =>
     set((state) => {
       const existingProductIndex = state.cart.findIndex(

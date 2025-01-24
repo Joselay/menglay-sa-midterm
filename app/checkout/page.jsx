@@ -12,6 +12,8 @@ import useTelegramStore from "../stores/telegramStore";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Check, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const steps = [
   { name: "Cart", href: "#", status: "complete" },
@@ -23,6 +25,9 @@ export default function Checkout() {
   const { cart, getTotalPrice, clearCart } = useCartStore();
   const { botToken, chatId } = useTelegramStore();
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const subtotal = getTotalPrice();
   const shipping = 15.0;
@@ -66,6 +71,7 @@ export default function Checkout() {
   };
 
   const handleCheckout = async () => {
+    setLoading(true);
     if (!botToken || !chatId) {
       toast({
         description: (
@@ -75,6 +81,7 @@ export default function Checkout() {
           </div>
         ),
       });
+      setLoading(false);
       return;
     }
 
@@ -124,7 +131,6 @@ export default function Checkout() {
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        console.log("Message sent successfully:", data);
         toast({
           description: (
             <div className="flex items-center gap-2">
@@ -133,6 +139,7 @@ export default function Checkout() {
             </div>
           ),
         });
+        router.push("/product");
       } else {
         throw new Error("Failed to send message");
       }
@@ -146,11 +153,26 @@ export default function Checkout() {
           </div>
         ),
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="bg-white">
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75 backdrop-blur-sm">
+          <div className="text-center">
+            <Image
+              width={150}
+              height={150}
+              src="/loading.gif"
+              alt="Loading image"
+              priority
+            />
+          </div>
+        </div>
+      )}
       <div
         aria-hidden="true"
         className="fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block"
@@ -604,7 +626,7 @@ export default function Checkout() {
                 onClick={handleCheckout}
                 className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto"
               >
-                Continue
+                Purchase
               </button>
               <p className="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left">
                 You won't be charged until the next step.

@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import useCartStore from "../stores/cartStore";
 import useTelegramStore from "../stores/telegramStore";
+import { BadgeCheck } from "lucide-react";
 
 const perks = [
   {
@@ -162,29 +163,31 @@ export default function ProductsList() {
         </div>
       )}
 
-      <header className="relative">
+      <header className="relative mt-4">
         <nav aria-label="Top">
           <div className="bg-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="#">
-                    <span className="sr-only">Your Company</span>
+                  <a href="/" className="flex items-center gap-2 group">
                     <img
-                      alt=""
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      className="h-8 w-auto"
+                      alt="logo"
+                      src="/profile.jpg"
+                      className="h-12 w-auto rounded-full"
                     />
+                    <span className="text-2xl font-semibold group-hover:text-indigo-500 transition duration-200 flex items-center ml-2">
+                      JOSE
+                      <BadgeCheck
+                        size={24}
+                        className="fill-indigo-500 stroke-white group-hover:fill-gray-600 transition duration-200"
+                      />
+                    </span>
                   </a>
                 </div>
 
                 <a href="#" className="lg:hidden">
                   <span className="sr-only">Your Company</span>
-                  <img
-                    alt=""
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    className="h-8 w-auto"
-                  />
+                  <img alt="" src="/next.svg" className="h-8 w-auto" />
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
@@ -444,16 +447,6 @@ export default function ProductsList() {
           </div>
         </div>
       </footer>
-
-      {/* Send Message Button */}
-      <div className="fixed bottom-4 right-4">
-        <button
-          onClick={handleSendMessage}
-          className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          Send Telegram Message
-        </button>
-      </div>
     </div>
   );
 }

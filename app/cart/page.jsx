@@ -308,7 +308,7 @@ export default function Cart() {
               <Link
                 href="/checkout"
                 className={`${
-                  isEmpty && "pointer-events-none bg-gray-400"
+                  isEmpty && "pointer-events-none !bg-gray-400"
                 }  w-full block text-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50`}
               >
                 Checkout

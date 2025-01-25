@@ -53,8 +53,9 @@ export default function Cart() {
     loadCart();
   }, [loadCart]);
 
+  const isEmpty = cart.length === 0;
   const subtotal = getTotalPrice();
-  const shipping = 5.0;
+  const shipping = isEmpty ? 0 : 5.0;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
@@ -306,7 +307,9 @@ export default function Cart() {
             <div className="mt-6 w-full">
               <Link
                 href="/checkout"
-                className="w-full block text-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                className={`${
+                  isEmpty && "pointer-events-none bg-gray-400"
+                }  w-full block text-center rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50`}
               >
                 Checkout
               </Link>

@@ -187,7 +187,7 @@ export default function ProductsList() {
 
                 <a href="#" className="lg:hidden">
                   <span className="sr-only">Your Company</span>
-                  <img alt="" src="/next.svg" className="h-8 w-auto" />
+                  <img alt="" src="/vercel.svg" className="h-8 w-auto" />
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">

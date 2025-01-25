@@ -168,23 +168,6 @@ export default function ProductsList() {
           <div className="bg-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
-                <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="/" className="flex items-center gap-2 group">
-                    <img
-                      alt="logo"
-                      src="/profile.jpg"
-                      className="h-12 w-auto rounded-full"
-                    />
-                    <span className="text-2xl font-semibold group-hover:text-indigo-500 transition duration-200 flex items-center ml-2">
-                      JOSE
-                      <BadgeCheck
-                        size={24}
-                        className="fill-indigo-500 stroke-white group-hover:fill-gray-600 transition duration-200"
-                      />
-                    </span>
-                  </a>
-                </div>
-
                 <a href="/" className="flex items-center gap-2 group">
                   <img
                     alt="logo"

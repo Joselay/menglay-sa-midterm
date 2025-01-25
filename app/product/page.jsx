@@ -185,9 +185,19 @@ export default function ProductsList() {
                   </a>
                 </div>
 
-                <a href="#" className="lg:hidden">
-                  <span className="sr-only">Your Company</span>
-                  <img alt="" src="/vercel.svg" className="h-8 w-auto" />
+                <a href="/" className="flex items-center gap-2 group">
+                  <img
+                    alt="logo"
+                    src="/profile.jpg"
+                    className="h-12 w-auto rounded-full"
+                  />
+                  <span className="text-2xl font-semibold group-hover:text-indigo-500 transition duration-200 flex items-center ml-2">
+                    JOSE
+                    <BadgeCheck
+                      size={24}
+                      className="fill-indigo-500 stroke-white group-hover:fill-gray-600 transition duration-200"
+                    />
+                  </span>
                 </a>
 
                 <div className="flex flex-1 items-center justify-end">
